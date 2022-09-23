@@ -1,27 +1,20 @@
-#include <stdio.h>
+#include "suite.h"
 #include "generator.h"
+#include <stdio.h>
 #include <stdlib.h>
 
-static void iterate(int first, int step, int size)
-{
-    generator_define_first(first);
-    generator_define_step(step);
-   generator_go_to_beginning();
-   
-   while (size-- > 0)
-      printf("%d, ", generator_get_next());
-}     
 int main(int argc, char **argv)
 {
-    long int max = argc > 1 ? strtol(argv[1], NULL, 10) : 1;
+    int n = argc > 1 ? atoi(argv[1]) : 0;
     
-    printf("des suites : \n");
-    for (long int i = 1; i <= max; i++)
+    generator_generate(Pas, -2);
+    generator_generate(Premier, n);   
+    printf("des suites arithmetiques: \n");
+    while (n-- > 0)
     {
-       iterate(1, 1, 1);
-       iterate(i - 1, -1, i - 1);
-       putchar('\n');
-    }
-    
+        suite_e_suite(n);
+        putchar('\n');
+    }    
+    printf("\n");
     return EXIT_SUCCESS;
-}   
+}    

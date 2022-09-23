@@ -12,4 +12,4 @@ void suite_e_suite(int longeur)
         printf("%d , ", generator_generate(Suivant));
     }
     printf(")\n");
-}    
+}  

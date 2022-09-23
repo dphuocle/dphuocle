@@ -1,55 +1,97 @@
 #include <stdio.h>
+#include <stdarg.h>
+
 #include "generator.h"
 
-//macroconstantes
 #define INITIAL_VALUE 1
 #define INITIAL_STEP 1
 
-//variables privees: environnement permanent du module
-static int init_val = INITIAL_VALUE;
-static int current_val = INITIAL_VALUE;
-static int step = INITIAL_STEP;
-
-void generator_define_first(int new_first_value)
+#define RECUPERER(parametres, debut, variable) 
+     va_start(parametres, debut);
+     variable = va_arg(parametres, int);
+     va_end(parametres);
+     
+int generator_generate(message m, ...)
 {
-   init_val = new_first_value;
-}
-void generator_define_step(int new_step)
-{
-   step = new_step;
-}
-void generator_go_to_beginning(void)
-{
-   current_val = init_val;
-}
-int generator_get_next(void)
-{
-   int n = current_val;
-   current_val += step;
-   return n;
-}   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-  
-   
-   
+    static int init_val = INITIAL_VALUE;
+    static int current_val = INITIAL_VALUE;
+    static int step = INITIAL_STEP;
+    va_list parametres;
     
+    switch (m)
+    {
+ 
+       case Premier:
+            //RECUPERER(parametre, m, init_val);
+            va_start(parametres, m);
+            init_val = va_arg(parametres, int);
+            va_end(parametres);
+            break;
+            
+       case Pas:
+            ////RECUPERER(parametre, m, step);
+            va_start(parametres, m);
+            step = va_arg(parametres, int);
+            va_end(parametres);
+            break;
+       
+       case Debut:
+            current_val = init_val;
+            break;
+            
+       case Suivant:
+       { 
+           int n = current_val;
+           current_val += step;
+           return n;
+       }
+       
+       default:
+           printf("problemo!!!!");
+           break;
+       }
+       return 0;
+}                      
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+            
+       
+       
+       
+              
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+               
+                    
