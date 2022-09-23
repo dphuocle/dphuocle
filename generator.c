@@ -1,20 +1,55 @@
-#include "generator.h"
-#define INITIAL_VALUE 1
 #include <stdio.h>
-int generator_generate(message m)
+#include "generator.h"
+
+//macroconstantes
+#define INITIAL_VALUE 1
+#define INITIAL_STEP 1
+
+//variables privees: environnement permanent du module
+static int init_val = INITIAL_VALUE;
+static int current_val = INITIAL_VALUE;
+static int step = INITIAL_STEP;
+
+void generator_define_first(int new_first_value)
 {
- 
-    static int val = INITIAL_VALUE;
-    switch (m)
-    {
-    case Debut:
-        val = INITIAL_VALUE;
-        return 0;
-    case Suivant:
-        return val++;
-    default:
-        printf("problemo");
-        break;
-    }
-    return 0;
-}                
+   init_val = new_first_value;
+}
+void generator_define_step(int new_step)
+{
+   step = new_step;
+}
+void generator_go_to_beginning(void)
+{
+   current_val = init_val;
+}
+int generator_get_next(void)
+{
+   int n = current_val;
+   current_val += step;
+   return n;
+}   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+  
+   
+   
+    
